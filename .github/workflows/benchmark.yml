@@ -68,34 +68,11 @@ jobs:
 
       - name: Run Benchmarks
         run: |
-          cd load-test
-          chmod +x run-benchmark.sh
-          ./run-benchmark.sh
+          chmod +x load-test/run-benchmark.sh
+          ./load-test/run-benchmark.sh
 
       - name: Upload Results
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-results
           path: results/
-
-      - name: Update README with Benchmark Status
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const results = JSON.parse(fs.readFileSync('results/summary.json', 'utf8'));
-            
-            let statusBadge = '![Benchmark Status](https://github.com/${{ github.repository }}/actions/workflows/benchmark.yml/badge.svg)';
-            
-            const readmePath = 'README.md';
-            let readme = fs.readFileSync(readmePath, 'utf8');
-            
-            // Adiciona ou atualiza o badge no início do README
-            if (!readme.includes('![Benchmark Status]')) {
-              readme = statusBadge + '\n\n' + readme;
-            } else {
-              readme = readme.replace(/!\[Benchmark Status\].*\n/, statusBadge + '\n');
-            }
-            
-            fs.writeFileSync(readmePath, readme); 
