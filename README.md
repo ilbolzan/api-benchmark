@@ -1,3 +1,5 @@
+![Benchmark Status](https://github.com/${{ github.repository }}/actions/workflows/benchmark.yml/badge.svg)
+
 # API Benchmark
 
 Este projeto realiza testes de benchmark em diferentes implementações de APIs REST, comparando performance, consumo de recursos e facilidade de desenvolvimento.
