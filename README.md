@@ -1,4 +1,4 @@
-![Benchmark Status](https://github.com/${{ github.repository }}/actions/workflows/benchmark.yml/badge.svg)
+![Benchmark Status](https://github.com/ilbolzan/api-benchmark/actions/workflows/benchmark.yml/badge.svg)
 
 # API Benchmark
 
