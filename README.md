@@ -98,10 +98,11 @@ Opções disponíveis:
 
 Os testes de carga são configurados com os seguintes parâmetros:
 
-- Rampa de subida: 5 segundos até 9000 usuários
-- Manutenção: 10 segundos com 9000 usuários
-- Aumento: 10 segundos até 15000 usuários
+- Rampa de subida: 5 segundos até 5000 usuários
+- Manutenção: 10 segundos com 5000 usuários
+- Aumento: 10 segundos até 9000 usuários
 - Rampa de descida: 1 segundo até 0 usuários
+
 
 Thresholds:
 - 95% das requisições devem completar em menos de 500ms

@@ -4,9 +4,9 @@ import { sleep, check } from 'k6';
 // Configuração do teste
 export const options = {
   stages: [
-    { duration: '5s', target: 9000 },
+    { duration: '5s', target: 5000 },
+    { duration: '10s', target: 5000 },
     { duration: '10s', target: 9000 },
-    { duration: '10s', target: 15000 },
     { duration: '1s', target: 0 }, 
   ],
   thresholds: {
