@@ -138,7 +138,7 @@ run_benchmark() {
   
   # Executa o teste
   echo "📊 Executando teste de carga..."
-  K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=${api_name}-html-report.html k6 run \
+  K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=results/${api_name}-html-report.html k6 run \
     -e API_URL="$api_url" \
     -e API_NAME="$api_name" \
     benchmark.js
@@ -235,4 +235,4 @@ fi
 
 echo "🎉 Todos os testes foram concluídos!"
 echo "📊 Relatórios gerados:"
-ls -1 summary-*.json 2>/dev/null || echo "Nenhum relatório encontrado." 
+ls -1 results/summary-*.json 2>/dev/null || echo "Nenhum relatório encontrado." 
