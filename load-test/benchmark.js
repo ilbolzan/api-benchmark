@@ -1,6 +1,5 @@
 import http from 'k6/http';
 import { sleep, check } from 'k6';
-import { htmlReport } from "https://jslib.k6.io/k6-html/0.0.6/index.js";
 
 // Configuração do teste
 export const options = {
@@ -36,8 +35,11 @@ export default function() {
 
 // Função para imprimir um resumo ao final do teste
 export function handleSummary(data) {
+  console.log('Teste concluído!');
+  console.log(`API: ${API_NAME}`);
+  console.log(`URL: ${API_URL}`);
+  
   return {
-    "results/summary.json": JSON.stringify(data),
-    "results/summary.html": htmlReport(data),
+    [`results/summary-${API_NAME}.json`]: JSON.stringify(data),
   };
 } 

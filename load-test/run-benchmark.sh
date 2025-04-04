@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Obtém o diretório absoluto onde o script está localizado
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
+
 # Lista de APIs
 APIS=(
   "spring-boot"
@@ -20,11 +24,11 @@ URLS=(
 
 # Comandos de inicialização
 START_COMMANDS=(
-  "cd ../apis/spring-boot && mvn spring-boot:run &"
-  "cd ../apis/go && go run main.go &"
-  "cd ../apis/quarkus && mvn quarkus:dev &"
-  "cd ../apis/webflux && mvn spring-boot:run &"
-  "cd ../apis/rust && cargo run &"
+  "cd \"$PROJECT_ROOT/apis/spring-boot\" && mvn spring-boot:run &"
+  "cd \"$PROJECT_ROOT/apis/go\" && go run main.go &"
+  "cd \"$PROJECT_ROOT/apis/quarkus\" && mvn quarkus:dev &"
+  "cd \"$PROJECT_ROOT/apis/webflux\" && mvn spring-boot:run &"
+  "cd \"$PROJECT_ROOT/apis/rust\" && cargo run &"
 )
 
 # Função para verificar se uma porta está em uso
@@ -138,10 +142,10 @@ run_benchmark() {
   
   # Executa o teste
   echo "📊 Executando teste de carga..."
-  K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=results/${api_name}-html-report.html k6 run \
+  K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_EXPORT=results/summary-${api_name}.html k6 run \
     -e API_URL="$api_url" \
     -e API_NAME="$api_name" \
-    benchmark.js
+    "$SCRIPT_DIR/benchmark.js"
   
   # Para a aplicação
   echo "🛑 Parando aplicação $api_name..."
@@ -235,4 +239,4 @@ fi
 
 echo "🎉 Todos os testes foram concluídos!"
 echo "📊 Relatórios gerados:"
-ls -1 results/summary-*.json 2>/dev/null || echo "Nenhum relatório encontrado." 
+ls -1 "$PROJECT_ROOT/results/summary-*.json" 2>/dev/null || echo "Nenhum relatório encontrado." 
